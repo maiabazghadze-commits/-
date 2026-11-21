@@ -1,0 +1,2136 @@
+/* ========================================================
+   სასწავლო პლატფორმა: "რა არის დომენი?" (V-VI კლასი)
+   თანამედროვე, სუფთა და მოსწავლეზე მორგებული დიზაინი
+   ======================================================== */
+
+:root {
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-light: #e0e7ff;
+  --secondary: #0ea5e9;
+  --secondary-hover: #0284c7;
+  --accent: #f59e0b;
+  --accent-light: #fef3c7;
+  --success: #10b981;
+  --success-light: #d1fae5;
+  --danger: #ef4444;
+  --danger-light: #fee2e2;
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-light: #94a3b8;
+  --border-color: #e2e8f0;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 14px -2px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 12px 28px -4px rgba(15, 23, 42, 0.1);
+  --font-family: 'Fira GO', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Sylfaen", sans-serif;
+}
+
+/* ძირითადი გადატვირთვა */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
+  font-size: 16px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ზედა პანელი და ჰედერი */
+.app-header {
+  background: #ffffff;
+  border-bottom: 2px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #1e293b;
+  letter-spacing: -0.02em;
+}
+
+.brand-subtitle {
+  font-size: 0.82rem;
+  color: #64748b;
+  font-weight: 500;
+  display: block;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.control-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f5f9;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  padding: 7px 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+  background: #e2e8f0;
+  color: var(--text-main);
+  transform: translateY(-1px);
+}
+
+.progress-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-light);
+  color: #92400e;
+  border: 1px solid #fde68a;
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+/* ნავიგაციის ტაბები */
+.nav-tabs-wrapper {
+  background: #f8fafc;
+  border-top: 1px solid var(--border-color);
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-tabs {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6px 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.nav-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 9px 16px;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-tab:hover {
+  background: #ffffff;
+  color: var(--primary);
+  border-color: #cbd5e1;
+}
+
+.nav-tab.active {
+  background: #ffffff;
+  color: var(--primary);
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-sm);
+  font-weight: 700;
+}
+
+.tab-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: var(--text-main);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.nav-tab.active .tab-num {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+/* ძირითადი შინაარსის კონტეინერი */
+.main-content {
+  flex: 1;
+  max-width: 1120px;
+  width: 100%;
+  margin: 24px auto;
+  padding: 0 20px;
+}
+
+/* მასკოტის მისალმების ზოლი */
+.mascot-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, #eef2ff 0%, #f0fdf4 100%);
+  border: 1.5px solid #c7d2fe;
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+  animation: fadeIn 0.4s ease;
+}
+
+.mascot-avatar {
+  flex-shrink: 0;
+  animation: gentleBounce 3s infinite ease-in-out;
+}
+
+.mascot-speech {
+  font-size: 0.96rem;
+  color: #1e1b4b;
+  line-height: 1.5;
+}
+
+/* ტაბების პანელები */
+.tab-panel {
+  display: none;
+  animation: slideFadeIn 0.3s ease;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* ბარათები */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.intro-hero-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+  border-left: 6px solid var(--primary);
+}
+
+.hero-badge {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: 10px;
+  letter-spacing: 0.03em;
+}
+
+.card-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.hero-desc {
+  font-size: 1.08rem;
+  color: #334155;
+  line-height: 1.6;
+}
+
+.section-heading {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.section-sub {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+/* გრიდები */
+.grid-2-col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.grid-3-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* თვისებების ბარათები */
+.feature-card {
+  margin-bottom: 0;
+  border-top: 4px solid var(--secondary);
+}
+
+.feature-icon {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+}
+
+.feature-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #1e293b;
+}
+
+.feature-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.example-pill-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.example-pill {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-family: monospace;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* ბენეფიტის ბარათები */
+.benefit-card {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  transition: all 0.2s ease;
+}
+
+.benefit-card:hover {
+  background: #ffffff;
+  border-color: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.benefit-badge {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.benefit-card h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+.benefit-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ========================================================
+   ინტერაქტიული ყუთები და DNS სიმულატორი
+   ======================================================== */
+.interactive-box {
+  background: #ffffff;
+  border: 2px solid #e0e7ff;
+  border-radius: var(--radius-lg);
+}
+
+.box-header {
+  margin-bottom: 20px;
+}
+
+.box-tag {
+  display: inline-block;
+  background: #ede9fe;
+  color: #6d28d9;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  margin-bottom: 6px;
+}
+
+.box-header h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1e1b4b;
+}
+
+.dns-simulator {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.dns-input-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.dns-input-row label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.form-select, .form-input {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 10px 14px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  color: var(--text-main);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-select:focus, .form-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ვიზუალიზატორი */
+.dns-visualizer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1.5px dashed #cbd5e1;
+  border-radius: var(--radius-md);
+  padding: 28px 36px;
+  margin-bottom: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dns-node {
+  text-align: center;
+  min-width: 140px;
+}
+
+.node-icon {
+  font-size: 2.2rem;
+  margin-bottom: 4px;
+}
+
+.node-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.node-value {
+  font-family: monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  margin-top: 6px;
+  display: inline-block;
+}
+
+.human-node .node-value {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.computer-node .node-value {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.dns-arrow-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px;
+  position: relative;
+}
+
+.dns-arrow-line {
+  width: 100%;
+  height: 4px;
+  background: #cbd5e1;
+  border-radius: 2px;
+  position: relative;
+}
+
+.dns-packet {
+  position: absolute;
+  top: -12px;
+  left: 0;
+  font-size: 1.3rem;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dns-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.dns-explanation {
+  background: #eef2ff;
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 0.92rem;
+  color: #1e1b4b;
+  line-height: 1.5;
+}
+
+/* ========================================================
+   მოდული 2: „ააწყვე შენი ვებსახლი“ (Builder)
+   ======================================================== */
+.analogy-card {
+  border-top: 4px solid #3b82f6;
+  text-align: center;
+  padding: 24px 18px;
+}
+
+.analogy-icon {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+
+.analogy-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #3b82f6;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.analogy-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.analogy-real {
+  background: #f1f5f9;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: #334155;
+  margin-bottom: 10px;
+}
+
+.builder-game {
+  background: #f8fafc;
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.builder-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.build-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.build-btn:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.build-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #f1f5f9;
+}
+
+.build-btn.completed {
+  border-color: var(--success);
+  background: var(--success-light);
+  color: #065f46;
+}
+
+.btn-step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.build-btn.completed .btn-step-num {
+  background: var(--success);
+  color: #ffffff;
+}
+
+.btn-ico {
+  font-size: 1.3rem;
+}
+
+.btn-txt {
+  flex: 1;
+}
+
+.status-check {
+  font-size: 1rem;
+}
+
+/* ვიზუალური სცენა */
+.scene-stage {
+  height: 280px;
+  background: linear-gradient(180deg, #bae6fd 0%, #e0f2fe 65%, #86efac 65%, #4ade80 100%);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #93c5fd;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.stage-sky {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 65%;
+}
+
+.sun {
+  position: absolute;
+  top: 16px;
+  right: 28px;
+  font-size: 2.2rem;
+  animation: gentlePulse 4s infinite ease-in-out;
+}
+
+.cloud-1 {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  font-size: 1.8rem;
+  opacity: 0.85;
+}
+
+.cloud-2 {
+  position: absolute;
+  top: 50px;
+  left: 200px;
+  font-size: 1.4rem;
+  opacity: 0.7;
+}
+
+/* მიწა (ჰოსტინგი) */
+.stage-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+.stage-ground.active-ground {
+  background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+  border-top: 4px solid #15803d;
+}
+
+.ground-label {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1e293b;
+  box-shadow: var(--shadow-sm);
+}
+
+/* შენობა (საიტი) */
+.stage-building {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  z-index: 10;
+  animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.building-roof {
+  width: 0;
+  height: 0;
+  border-left: 75px solid transparent;
+  border-right: 75px solid transparent;
+  border-bottom: 45px solid #dc2626;
+  margin: 0 auto;
+}
+
+.building-body {
+  width: 130px;
+  height: 90px;
+  background: #fef08a;
+  border: 3px solid #ca8a04;
+  margin: 0 auto;
+  position: relative;
+  border-top: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.building-window {
+  width: 24px;
+  height: 24px;
+  background: #67e8f9;
+  border: 2px solid #0891b2;
+  position: absolute;
+  top: 14px;
+}
+
+#window1 { left: 16px; }
+#window2 { right: 16px; }
+
+.building-door {
+  width: 28px;
+  height: 42px;
+  background: #9a3412;
+  border: 2px solid #7c2d12;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom: none;
+}
+
+/* აბრა (დომენი) */
+.stage-sign {
+  position: absolute;
+  bottom: 25px;
+  right: 60px;
+  z-index: 15;
+  animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sign-board {
+  background: #1e1b4b;
+  color: #38bdf8;
+  border: 2px solid #38bdf8;
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.sign-pole {
+  width: 6px;
+  height: 35px;
+  background: #475569;
+  margin: 0 auto;
+}
+
+/* სტუმარი */
+.stage-visitor {
+  position: absolute;
+  bottom: 30px;
+  left: 40px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: walkIn 1.2s ease forwards;
+}
+
+.visitor-avatar {
+  font-size: 2.2rem;
+}
+
+.visitor-bubble {
+  background: #ffffff;
+  border: 1.5px solid #0f172a;
+  border-radius: 12px;
+  padding: 6px 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+.builder-status-msg {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  margin-top: 16px;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.builder-reset-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+/* ========================================================
+   მოდული 3: დომენის დონეები და სართულები
+   ======================================================== */
+.domain-anatomy-visual {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  text-align: center;
+}
+
+.domain-full-string {
+  font-family: monospace;
+  font-size: 1.7rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: #ffffff;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  border: 2px solid #cbd5e1;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 12px;
+}
+
+.domain-slice {
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+}
+
+.slice-1 {
+  background: #fef08a;
+  color: #854d0e;
+  border: 1.5px solid #facc15;
+}
+
+.slice-2 {
+  background: #bfdbfe;
+  color: #1e40af;
+  border: 1.5px solid #93c5fd;
+}
+
+.slice-3 {
+  background: #fed7aa;
+  color: #9a3412;
+  border: 1.5px solid #fdba74;
+}
+
+.domain-dot {
+  color: #64748b;
+  font-weight: 900;
+  padding: 0 4px;
+}
+
+.anatomy-direction-arrow {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 0.92rem;
+  margin-bottom: 24px;
+}
+
+.levels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  text-align: left;
+}
+
+.level-box {
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 18px;
+}
+
+.level-1-box { border-top: 4px solid #eab308; }
+.level-2-box { border-top: 4px solid #3b82f6; }
+.level-3-box { border-top: 4px solid #f97316; }
+
+.level-badge {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.level-1-box .level-badge { color: #a16207; }
+.level-2-box .level-badge { color: #1d4ed8; }
+.level-3-box .level-badge { color: #c2410c; }
+
+.level-box h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #0f172a;
+}
+
+.level-example {
+  background: #f8fafc;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}
+
+.level-box p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* TLD კატეგორიები */
+.tld-category-card {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px;
+}
+
+.tld-icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.tld-category-card h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #0f172a;
+}
+
+.styled-list {
+  list-style: none;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.styled-list li {
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.styled-list li::before {
+  content: "•";
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* წესების ბლოკი */
+.rules-highlight-card {
+  border-left: 6px solid #eab308;
+}
+
+.rules-header {
+  margin-bottom: 18px;
+}
+
+.rules-badge {
+  display: inline-block;
+  background: var(--accent-light);
+  color: #92400e;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.rule-sub-box {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 18px;
+}
+
+.rule-sub-box h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #0f172a;
+}
+
+.warning-callout {
+  background: var(--accent-light);
+  border: 1px solid #fde68a;
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  color: #92400e;
+  margin-top: 12px;
+}
+
+.icann-box {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+}
+
+.icann-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.icann-icon {
+  font-size: 1.6rem;
+}
+
+.icann-box p {
+  font-size: 0.9rem;
+  color: #312e81;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+/* ========================================================
+   მოდული 4: კუთვნილება და ეთიკა
+   ======================================================== */
+.compare-table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  text-align: left;
+}
+
+.compare-table th {
+  background: #f1f5f9;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.compare-table td {
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+
+.compare-table tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.badge-tag {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.badge-tag.green {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.badge-tag.orange {
+  background: #ffedd5;
+  color: #9a3412;
+}
+
+.info-callout {
+  background: #eff6ff;
+  border-left: 4px solid var(--secondary);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 0.92rem;
+  color: #1e3a8a;
+}
+
+.ethics-focus-card {
+  border-top: 4px solid #10b981;
+}
+
+.ethics-title-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.ethics-shield-icon {
+  font-size: 2.2rem;
+}
+
+.ethics-point-box {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 18px;
+}
+
+.ethics-point-box h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.ethics-point-box p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+/* ეთიკური ქეისები */
+.ethics-cases-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.case-card {
+  background: #f8fafc;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  transition: all 0.2s ease;
+}
+
+.case-card.solved {
+  border-color: var(--success);
+  background: #ffffff;
+}
+
+.case-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.case-num-badge {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+}
+
+.case-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.case-story {
+  font-size: 0.93rem;
+  color: #334155;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.case-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.case-opt-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.case-opt-btn:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: #f1f5f9;
+}
+
+.case-opt-btn.correct {
+  border-color: var(--success);
+  background: var(--success-light);
+  color: #065f46;
+  font-weight: 600;
+}
+
+.case-opt-btn.incorrect {
+  border-color: var(--danger);
+  background: var(--danger-light);
+  color: #991b1b;
+}
+
+.case-feedback {
+  margin-top: 14px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  animation: fadeIn 0.3s ease;
+}
+
+.case-feedback.success {
+  background: var(--success-light);
+  border-left: 4px solid var(--success);
+  color: #065f46;
+}
+
+.case-feedback.hint {
+  background: var(--accent-light);
+  border-left: 4px solid var(--accent);
+  color: #92400e;
+}
+
+/* ========================================================
+   მოდული 5: დომენ-ლაბორატორია
+   ======================================================== */
+.lab-section-card {
+  border-top: 4px solid var(--secondary);
+}
+
+.lab-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.lab-pill {
+  background: #e0f2fe;
+  color: #0369a1;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.preset-domains-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 14px 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.preset-btn {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  padding: 5px 10px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preset-btn:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+}
+
+.deconstructor-input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.deconstructor-input-row .form-input {
+  flex: 1;
+  font-family: monospace;
+  font-size: 1rem;
+}
+
+.deconstructor-result {
+  background: #f8fafc;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px;
+}
+
+.decon-slices-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+  font-family: monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.decon-chip {
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.decon-chip .chip-label {
+  font-family: var(--font-family);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.chip-tld { background: #fef08a; color: #713f12; border: 1.5px solid #facc15; }
+.chip-main { background: #bfdbfe; color: #1e3a8a; border: 1.5px solid #93c5fd; }
+.chip-sub { background: #fed7aa; color: #7c2d12; border: 1.5px solid #fdba74; }
+
+/* ვალიდატორი */
+.creator-box {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.creator-input-group {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  padding: 6px 14px;
+  margin-bottom: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.creator-input-group:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.input-prefix {
+  font-family: monospace;
+  color: #94a3b8;
+  font-size: 0.95rem;
+  margin-right: 6px;
+}
+
+.creator-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  background: transparent;
+}
+
+.creator-select {
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  font-family: monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: #f8fafc;
+  outline: none;
+  cursor: pointer;
+}
+
+.char-counter-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.char-progress-track {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.char-progress-fill {
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.char-progress-fill.warning {
+  background: var(--accent);
+}
+
+.char-progress-fill.danger {
+  background: var(--danger);
+}
+
+.validator-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.val-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.val-item.valid {
+  color: #065f46;
+  font-weight: 600;
+}
+
+.val-item.invalid {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.creator-verdict-box {
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* ========================================================
+   მოდული 6: ქვიზი და სერტიფიკატი
+   ======================================================== */
+.quiz-card {
+  border-top: 4px solid var(--primary);
+}
+
+.quiz-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.quiz-progress-bar {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  transition: width 0.3s ease;
+}
+
+.quiz-question-text {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.quiz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.quiz-opt-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz-opt-btn:hover:not(:disabled) {
+  background: #ffffff;
+  border-color: var(--primary);
+  transform: translateX(4px);
+}
+
+.quiz-opt-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.82rem;
+  flex-shrink: 0;
+}
+
+.quiz-opt-btn.correct {
+  background: var(--success-light);
+  border-color: var(--success);
+  color: #065f46;
+  font-weight: 700;
+}
+
+.quiz-opt-btn.correct .quiz-opt-badge {
+  background: var(--success);
+  color: #ffffff;
+}
+
+.quiz-opt-btn.incorrect {
+  background: var(--danger-light);
+  border-color: var(--danger);
+  color: #991b1b;
+}
+
+.quiz-opt-btn.incorrect .quiz-opt-badge {
+  background: var(--danger);
+  color: #ffffff;
+}
+
+.quiz-feedback-box {
+  background: #f8fafc;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.quiz-feedback-box.correct-box {
+  background: var(--success-light);
+  border-color: var(--success);
+}
+
+.quiz-feedback-box.hint-box {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+
+.feedback-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.feedback-content {
+  flex: 1;
+}
+
+.feedback-content h4 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.feedback-content p {
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* ქვიზის დასრულების ეკრანი */
+.quiz-finish-card {
+  text-align: center;
+  padding: 40px 24px;
+}
+
+.finish-confetti-badge {
+  font-size: 4rem;
+  margin-bottom: 12px;
+  animation: gentleBounce 1.5s infinite;
+}
+
+.finish-score-lead {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin: 12px 0 24px;
+}
+
+.certificate-entry-box {
+  max-width: 540px;
+  margin: 0 auto 24px;
+  background: #f8fafc;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  text-align: left;
+}
+
+.cert-input-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.cert-input-row .form-input {
+  flex: 1;
+}
+
+.finish-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+/* ========================================================
+   სერტიფიკატის მოდალი და დიზაინი
+   ======================================================== */
+.certificate-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.certificate-modal-content {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  max-width: 840px;
+  width: 100%;
+  padding: 24px;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  animation: popIn 0.3s ease;
+}
+
+.cert-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #f1f5f9;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.cert-close-btn:hover {
+  background: #e2e8f0;
+}
+
+/* სერტიფიკატის ჩარჩო */
+.certificate-frame {
+  background: #ffffff;
+  padding: 12px;
+}
+
+.cert-border-outer {
+  border: 8px double #1e3a8a;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.cert-border-inner {
+  border: 2px solid #ca8a04;
+  padding: 36px 30px;
+  text-align: center;
+  background: linear-gradient(135deg, #fffdfa 0%, #ffffff 50%, #fefce8 100%);
+  position: relative;
+}
+
+.cert-emblem {
+  font-size: 2.8rem;
+  margin-bottom: 4px;
+}
+
+.cert-super-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.cert-main-title {
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: #1e3a8a;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+
+.cert-award-text {
+  font-size: 1rem;
+  color: #475569;
+  margin-bottom: 16px;
+}
+
+.cert-recipient-name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0f172a;
+  border-bottom: 2px dashed #94a3b8;
+  display: inline-block;
+  padding: 4px 30px;
+  margin-bottom: 20px;
+  min-width: 320px;
+}
+
+.cert-description {
+  font-size: 0.98rem;
+  color: #334155;
+  line-height: 1.6;
+  max-width: 620px;
+  margin: 0 auto 30px;
+}
+
+.cert-topic {
+  color: #1e3a8a;
+  font-size: 1.1rem;
+}
+
+.cert-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 20px;
+}
+
+.cert-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 140px;
+}
+
+.cert-sign-line {
+  width: 130px;
+  height: 1.5px;
+  background: #334155;
+  margin-bottom: 6px;
+}
+
+.cert-sign-label {
+  font-size: 0.78rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.cert-date {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.cert-stamp {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  border: 3px dashed #dc2626;
+  color: #dc2626;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-weight: 800;
+  transform: rotate(-12deg);
+  opacity: 0.85;
+}
+
+.cert-modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* ========================================================
+   ღილაკები და დამხმარე ელემენტები
+   ======================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-secondary {
+  background: #f1f5f9;
+  color: var(--text-main);
+  border: 1px solid #cbd5e1;
+}
+
+.btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+.btn-success {
+  background: var(--success);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+}
+
+.btn-success:hover {
+  background: #059669;
+}
+
+.step-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.btn-prev {
+  background: #f1f5f9;
+  color: var(--text-muted);
+}
+
+.btn-next {
+  background: var(--primary);
+  color: #ffffff;
+  margin-left: auto;
+}
+
+/* ქვედა კოლონტიტული */
+.app-footer {
+  background: #ffffff;
+  border-top: 1px solid var(--border-color);
+  padding: 24px;
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer-container p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.footer-sub {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+/* კონფეტი ტილო */
+.confetti-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2000;
+}
+
+/* ========================================================
+   ანიმაციები
+   ======================================================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gentleBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes gentlePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@keyframes walkIn {
+  from {
+    left: -60px;
+    opacity: 0;
+  }
+  to {
+    left: 40px;
+    opacity: 1;
+  }
+}
+
+/* ========================================================
+   საბეჭდი სტილები (სერტიფიკატის ამოსაბეჭდად)
+   ======================================================== */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .certificate-modal,
+  .certificate-modal-content,
+  #printableCertificate,
+  #printableCertificate * {
+    visibility: visible;
+  }
+
+  .certificate-modal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    padding: 0;
+  }
+
+  .certificate-modal-content {
+    box-shadow: none;
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .cert-close-btn,
+  .cert-modal-actions {
+    display: none !important;
+  }
+
+  .cert-border-outer {
+    border: 6px double #1e3a8a;
+  }
+}
+
+/* ========================================================
+   მობილური და ტაბლეტის ადაპტაცია
+   ======================================================== */
+@media (max-width: 900px) {
+  .grid-3-col,
+  .levels-grid,
+  .builder-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-2-col {
+    grid-template-columns: 1fr;
+  }
+
+  .dns-visualizer {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .dns-arrow-container {
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .domain-full-string {
+    font-size: 1.25rem;
+    padding: 8px 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cert-footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .cert-stamp {
+    order: -1;
+  }
+}

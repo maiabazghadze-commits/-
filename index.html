@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>რა არის დომენი? | ინტერაქტიული გაკვეთილი V-VI კლასისთვის</title>
+  <meta name="description" content="ინტერაქტიული, ვიზუალურად მიმზიდველი სასწავლო რესურსი კომპიუტერულ ტექნოლოგიებში V-VI კლასის მოსწავლეებისთვის: რა არის დომენი, დონეები, წესები და ციფრული ეთიკა.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+GO:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ზედა პანელი: ნავიგაცია და პროგრესი -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 48 48" width="38" height="38" fill="none">
+            <circle cx="24" cy="24" r="21" stroke="#3b82f6" stroke-width="3" fill="#eff6ff"/>
+            <ellipse cx="24" cy="24" rx="10" ry="21" stroke="#3b82f6" stroke-width="2.5"/>
+            <line x1="3" y1="24" x2="45" y2="24" stroke="#3b82f6" stroke-width="2.5"/>
+            <line x1="7" y1="14" x2="41" y2="14" stroke="#93c5fd" stroke-width="2"/>
+            <line x1="7" y1="34" x2="41" y2="34" stroke="#93c5fd" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">რა არის დომენი?</h1>
+          <span class="brand-subtitle">კომპიუტერული ტექნოლოგიები • V–VI კლასი (10–12 წელი)</span>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <button id="soundToggleBtn" class="control-btn" title="ხმის ჩართვა/გამორთვა" aria-label="ხმის მართვა">
+          <span class="btn-icon" id="soundIcon">🔊</span>
+          <span class="btn-text">ხმა</span>
+        </button>
+        <div class="progress-badge">
+          <span class="progress-star">⭐</span>
+          <span id="overallScoreText">ქულა: 0/100</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ნავიგაციის ტაბები -->
+    <nav class="nav-tabs-wrapper" aria-label="სასწავლო მოდულები">
+      <div class="nav-tabs" role="tablist">
+        <button class="nav-tab active" data-tab="module-intro" role="tab" aria-selected="true">
+          <span class="tab-num">1</span>
+          <span class="tab-label">რა არის დომენი?</span>
+        </button>
+        <button class="nav-tab" data-tab="module-house" role="tab" aria-selected="false">
+          <span class="tab-num">2</span>
+          <span class="tab-label">ააწყვე ვებსახლი</span>
+        </button>
+        <button class="nav-tab" data-tab="module-levels" role="tab" aria-selected="false">
+          <span class="tab-num">3</span>
+          <span class="tab-label">სართულები & წესები</span>
+        </button>
+        <button class="nav-tab" data-tab="module-ethics" role="tab" aria-selected="false">
+          <span class="tab-num">4</span>
+          <span class="tab-label">კუთვნილება & ეთიკა</span>
+        </button>
+        <button class="nav-tab" data-tab="module-lab" role="tab" aria-selected="false">
+          <span class="tab-num">5</span>
+          <span class="tab-label">დომენ-ლაბორატორია</span>
+        </button>
+        <button class="nav-tab" data-tab="module-quiz" role="tab" aria-selected="false">
+          <span class="tab-num">6</span>
+          <span class="tab-label">ქვიზი & სერტიფიკატი</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ძირითადი შინაარსი -->
+  <main class="main-content">
+
+    <!-- მასკოტის (დოტის) მისალმება -->
+    <aside class="mascot-bar" id="mascotBar">
+      <div class="mascot-avatar" id="mascotAvatar">
+        <svg viewBox="0 0 64 64" width="56" height="56" fill="none">
+          <circle cx="32" cy="32" r="30" fill="#4f46e5"/>
+          <circle cx="32" cy="32" r="24" fill="#6366f1"/>
+          <!-- Antennas -->
+          <line x1="32" y1="8" x2="32" y2="16" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="32" cy="7" r="4" fill="#f59e0b"/>
+          <!-- Eyes -->
+          <circle cx="23" cy="28" r="6" fill="#ffffff"/>
+          <circle cx="23" cy="28" r="3" fill="#1e1b4b"/>
+          <circle cx="41" cy="28" r="6" fill="#ffffff"/>
+          <circle cx="41" cy="28" r="3" fill="#1e1b4b"/>
+          <!-- Cheeks -->
+          <circle cx="16" cy="35" r="3" fill="#f43f5e" opacity="0.6"/>
+          <circle cx="48" cy="35" r="3" fill="#f43f5e" opacity="0.6"/>
+          <!-- Smile -->
+          <path d="M24 38 Q32 46 40 38" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="mascot-speech" id="mascotSpeech">
+        <strong>გამარჯობა, ახალგაზრდა მკვლევარო!</strong> მე ვარ <strong>დოტი</strong> — შენი მეგობარი ციფრული გზამკვლევი. მზად ხარ გაიგო, როგორ მუშაობს ინტერნეტის მისამართები? დავიწყოთ!
+      </div>
+    </aside>
+
+    <!-- ===================================================
+         მოდული 1: რა არის დომენი და რატომ გვჭირდება?
+         =================================================== -->
+    <section id="module-intro" class="tab-panel active" role="tabpanel">
+      <div class="card intro-hero-card">
+        <div class="hero-badge">ნაბიჯი 1 • ინტერნეტის მისამართები</div>
+        <h2 class="card-title">რა არის დომენი და როგორ პოულობს მას ინტერნეტი?</h2>
+        <p class="hero-desc">
+          წარმოიდგინე, რომ ინტერნეტი არის <strong>უზარმაზარი ციფრული ქალაქი</strong> მილიარდობით სახლითა და შენობით. როგორ მივაგნოთ სასურველ ადგილს? რა თქმა უნდა — <strong>მისამართით</strong>!
+        </p>
+      </div>
+
+      <!-- დომენის განმარტების ბლოკები -->
+      <div class="grid-2-col">
+        <div class="card feature-card">
+          <div class="feature-icon">🌐</div>
+          <h3>რა არის დომენური სახელი?</h3>
+          <p>
+            <strong>დომენური სახელი (Domain Name)</strong> არის ვებსაიტის ან ელექტრონული ფოსტის <strong>უნიკალური ინტერნეტ-მისამართი</strong>, რომლითაც ადამიანები მას მარტივად პოულობენ და იმახსოვრებენ.
+          </p>
+          <div class="example-pill-list">
+            <span class="example-pill">google.ge</span>
+            <span class="example-pill">scratch.mit.edu</span>
+            <span class="example-pill">wikipedia.org</span>
+          </div>
+        </div>
+
+        <div class="card feature-card">
+          <div class="feature-icon">🤖</div>
+          <h3>როგორ ესმით ეს კომპიუტერებს?</h3>
+          <p>
+            ადამიანებს გვიადვილდება სახელების დამახსოვრება, მაგრამ კომპიუტერები მხოლოდ ციფრებით „საუბრობენ“!
+            ინტერნეტ-სისტემა დომენურ სახელს ციფრულ მისამართად — <strong>IP მისამართად</strong> (მაგ., <code>142.250.185.78</code> ან <code>123.123.123.123</code>) თარგმნის.
+          </p>
+        </div>
+      </div>
+
+      <!-- ინტერაქტიული DNS მთარგმნელი (სიმულატორი) -->
+      <div class="card interactive-box">
+        <div class="box-header">
+          <span class="box-tag">ინტერაქტიული ცდა</span>
+          <h3>⚡ გამოსცადე: DNS „სატელეფონო წიგნი“ და IP მისამართი</h3>
+          <p>აირჩიე დომენი ან ჩაწერე შენი საყვარელი საიტი და ნახე, როგორ თარგმნის მას ინტერნეტი კომპიუტერისთვის გასაგებ ციფრებად!</p>
+        </div>
+
+        <div class="dns-simulator">
+          <div class="dns-input-row">
+            <label for="dnsDomainSelect">აირჩიე დომენი:</label>
+            <select id="dnsDomainSelect" class="form-select">
+              <option value="skola.ge">skola.ge (საქართველოს სკოლა)</option>
+              <option value="google.ge">google.ge (საძიებო სისტემა)</option>
+              <option value="wikipedia.org">wikipedia.org (ენციკლოპედია)</option>
+              <option value="custom">✍️ სხვა დომენის ჩაწერა...</option>
+            </select>
+            <input type="text" id="dnsCustomInput" class="form-input hidden" placeholder="მაგ: my-kids-club.ge" maxlength="40">
+            <button id="dnsTranslateBtn" class="btn btn-primary">🚀 გადათარგმნე IP-ში!</button>
+          </div>
+
+          <div class="dns-visualizer" id="dnsVisualizer">
+            <div class="dns-node human-node">
+              <div class="node-icon">👤</div>
+              <div class="node-title">ადამიანის ენა</div>
+              <div class="node-value" id="humanValueDisplay">skola.ge</div>
+            </div>
+
+            <div class="dns-arrow-container">
+              <div class="dns-arrow-line">
+                <span class="dns-packet" id="dnsPacket">📦</span>
+              </div>
+              <span class="dns-label">DNS თარგმანი</span>
+            </div>
+
+            <div class="dns-node computer-node">
+              <div class="node-icon">💻</div>
+              <div class="node-title">კომპიუტერის IP</div>
+              <div class="node-value" id="ipValueDisplay">192.168.1.1</div>
+            </div>
+          </div>
+
+          <div class="dns-explanation" id="dnsExplanation">
+            💡 <strong>როგორ მუშაობს?</strong> როგორც შენს ტელეფონში ეძებ მეგობრის სახელს („გიორგი“) და ტელეფონი რეკავს მის ციფრულ ნომერზე, ისე ინტერნეტში <strong>DNS</strong> დომენს (`skola.ge`) წამებში აკავშირებს მის ციფრულ IP-სთან!
+          </div>
+        </div>
+      </div>
+
+      <!-- რატომ არის დომენი ასე მნიშვნელოვანი? (3 სუპერ-თვისება) -->
+      <div class="card">
+        <h3 class="section-heading">🌟 რატომ არის საკუთარი დომენი ასე მნიშვნელოვანი?</h3>
+        <div class="grid-3-col">
+          <div class="benefit-card">
+            <div class="benefit-badge">1. უნიკალურობა</div>
+            <h4>🌍 ერთადერთი მსოფლიოში!</h4>
+            <p>
+              შენს ქალაქში შეიძლება რამდენიმე გიორგი ან ნინო ცხოვრობდეს, მაგრამ ინტერნეტში ერთი და იგივე დომენი ორ ადამიანს <strong>არასდროს</strong> ექნება. ის 100% უნიკალურია!
+            </p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-badge">2. ნდობა და იმიჯი</div>
+            <h4>⭐ ნდობა და პრესტიჟი</h4>
+            <p>
+              საკუთარი დომენი (მაგ. <code>myschool.ge</code>) გაცილებით სანდოა, ვიდრე უფასო ჰოსტინგის უცნაური მისამართი (<code>freehost.com/~user992/site</code>).
+            </p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-badge">3. თავისუფლება</div>
+            <h4>🦅 მობილურობა</h4>
+            <p>
+              თუ შენი დომენი გაქვს, ჰოსტინგის (სერვერის) შეცვლისას შენი მისამართი უცვლელი რჩება! შენი სტუმრები და მეგობრები არ დაგკარგავენ.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-footer">
+        <button class="btn btn-next" data-go="module-house">
+          შემდეგი: ააწყვე შენი ვებსახლი ➡️
+        </button>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         მოდული 2: „ააწყვე შენი ვებსახლი“ (დომენი, ჰოსტინგი, ვებსაიტი)
+         =================================================== -->
+    <section id="module-house" class="tab-panel" role="tabpanel">
+      <div class="card intro-hero-card">
+        <div class="hero-badge">ნაბიჯი 2 • ციფრული ანალოგია</div>
+        <h2 class="card-title">ინტერნეტის „ოქროს სამეული“: დომენი, ჰოსტინგი და ვებსაიტი</h2>
+        <p class="hero-desc">
+          ვებსაიტის სამუშაოდ <strong>სამივე კომპონენტი</strong> აუცილებელია. მოდი, შევადაროთ ისინი რეალურ ცხოვრებას და ავაშენოთ ჩვენი პირველი ციფრული სახლი!
+        </p>
+      </div>
+
+      <!-- ანალოგიის განმარტებითი ბარათები -->
+      <div class="grid-3-col analogy-cards">
+        <div class="card analogy-card" data-component="domain">
+          <div class="analogy-icon">📬</div>
+          <div class="analogy-tag">კომპონენტი 1</div>
+          <h3>დომენური სახელი</h3>
+          <div class="analogy-real">🏡 რეალურ სამყაროში: <strong>საფოსტო მისამართი</strong></div>
+          <p>
+            მისამართის აბრა შენობის კედელზე (მაგალითად: „მზიანი ქუჩა #10“). მის გარეშე ვერავინ მოგაგნებს!
+          </p>
+        </div>
+
+        <div class="card analogy-card" data-component="hosting">
+          <div class="analogy-icon">🌄</div>
+          <div class="analogy-tag">კომპონენტი 2</div>
+          <h3>ჰოსტინგი (სერვერი)</h3>
+          <div class="analogy-real">⛳ რეალურ სამყაროში: <strong>მიწის ნაკვეთი</strong></div>
+          <p>
+            ადგილი, სადაც შენობა უნდა დაიდგას. ინტერნეტში ეს არის მძლავრი კომპიუტერი (სერვერი), რომელიც 24/7 ჩართულია.
+          </p>
+        </div>
+
+        <div class="card analogy-card" data-component="website">
+          <div class="analogy-icon">🏠</div>
+          <div class="analogy-tag">კომპონენტი 3</div>
+          <h3>ვებსაიტი</h3>
+          <div class="analogy-real">🧱 რეალურ სამყაროში: <strong>თავად შენობა / სახლი</strong></div>
+          <p>
+            კედლები, ოთახები და ავეჯი! ინტერნეტში ეს არის შენი ტექსტები, სურათები, თამაშები და გვერდები.
+          </p>
+        </div>
+      </div>
+
+      <!-- ინტერაქტიული სიმულატორი: ააწყვე ვებსახლი -->
+      <div class="card interactive-box">
+        <div class="box-header">
+          <span class="box-tag">ინტერაქტიული თამაში</span>
+          <h3>🛠️ ააწყვე შენი ვებსახლი!</h3>
+          <p>დააჭირე ქვემოთ მოცემულ სამივე კომპონენტს რიგ-რიგობით და ნახე, როგორ გაცოცხლდება შენი ვებსაიტი!</p>
+        </div>
+
+        <div class="builder-game">
+          <!-- სამართავი ღილაკები -->
+          <div class="builder-buttons">
+            <button class="build-btn" id="btnToggleHosting" data-part="hosting">
+              <span class="btn-step-num">1</span>
+              <span class="btn-ico">🌄</span>
+              <span class="btn-txt">1. მიწის ნაკვეთი (ჰოსტინგი)</span>
+              <span class="status-check" id="checkHosting">❌</span>
+            </button>
+
+            <button class="build-btn" id="btnToggleWebsite" data-part="website" disabled>
+              <span class="btn-step-num">2</span>
+              <span class="btn-ico">🏠</span>
+              <span class="btn-txt">2. სახლის აშენება (ვებსაიტი)</span>
+              <span class="status-check" id="checkWebsite">❌</span>
+            </button>
+
+            <button class="build-btn" id="btnToggleDomain" data-part="domain" disabled>
+              <span class="btn-step-num">3</span>
+              <span class="btn-ico">📬</span>
+              <span class="btn-txt">3. მისამართის მინიჭება (დომენი)</span>
+              <span class="status-check" id="checkDomain">❌</span>
+            </button>
+          </div>
+
+          <!-- ვიზუალური სცენა -->
+          <div class="scene-stage" id="sceneStage">
+            <!-- ცა და ღრუბლები -->
+            <div class="stage-sky">
+              <div class="cloud cloud-1">☁️</div>
+              <div class="cloud cloud-2">☁️</div>
+              <div class="sun">☀️</div>
+            </div>
+
+            <!-- მიწა (ჰოსტინგი) -->
+            <div class="stage-ground" id="stageGround">
+              <div class="ground-label" id="groundLabel">ჰოსტინგი არ არის არჩეული</div>
+            </div>
+
+            <!-- შენობა (ვებსაიტი) -->
+            <div class="stage-building hidden" id="stageBuilding">
+              <div class="building-roof"></div>
+              <div class="building-body">
+                <div class="building-window" id="window1"></div>
+                <div class="building-window" id="window2"></div>
+                <div class="building-door"></div>
+              </div>
+            </div>
+
+            <!-- აბრა (დომენი) -->
+            <div class="stage-sign hidden" id="stageSign">
+              <div class="sign-board">
+                <span class="sign-icon">🌐</span>
+                <span class="sign-text" id="signText">www.myschool.ge</span>
+              </div>
+              <div class="sign-pole"></div>
+            </div>
+
+            <!-- სტუმარი პერსონაჟი -->
+            <div class="stage-visitor hidden" id="stageVisitor">
+              <div class="visitor-avatar">🏃‍♂️</div>
+              <div class="visitor-bubble" id="visitorBubble">მივდივარ საიტზე!</div>
+            </div>
+          </div>
+
+          <!-- შედეგის შეტყობინება -->
+          <div class="builder-status-msg" id="builderStatusMsg">
+            👉 დაიწყე პირველი ნაბიჯით: დააჭირე <strong>„მიწის ნაკვეთი (ჰოსტინგი)“</strong> ღილაკს!
+          </div>
+
+          <div class="builder-reset-row">
+            <button id="btnResetBuilder" class="btn btn-secondary">🔄 თავიდან აწყობა</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-footer">
+        <button class="btn btn-prev" data-go="module-intro">⬅️ წინა ნაბიჯი</button>
+        <button class="btn btn-next" data-go="module-levels">შემდეგი: სართულები & წესები ➡️</button>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         მოდული 3: დომენის „სართულები“ (დონეები) და წესები
+         =================================================== -->
+    <section id="module-levels" class="tab-panel" role="tabpanel">
+      <div class="card intro-hero-card">
+        <div class="hero-badge">ნაბიჯი 3 • დონეები და წესები</div>
+        <h2 class="card-title">დომენის „სართულები“: როგორ ვკითხულობთ მისამართს?</h2>
+        <p class="hero-desc">
+          იცოდი, რომ დომენის ნაწილები ერთმანეთისგან <strong>წერტილებით</strong> გამოიყოფა, ხოლო მათი ათვლა იწყება <strong>მარჯვნიდან მარცხნივ</strong>? მოდი, გავეცნოთ თითოეულ დონეს!
+        </p>
+      </div>
+
+      <!-- დომენის დონეების ანატომია -->
+      <div class="card">
+        <h3 class="section-heading">🔍 დომენის ანატომია: მარჯვნიდან მარცხნივ!</h3>
+        <p class="section-sub">მაგალითად ავიღოთ დომენი: <strong>order.avangardhosting.com</strong></p>
+
+        <div class="domain-anatomy-visual">
+          <div class="domain-full-string">
+            <span class="domain-slice slice-3" id="sliceOrder">order</span>
+            <span class="domain-dot">.</span>
+            <span class="domain-slice slice-2" id="sliceAvangard">avangardhosting</span>
+            <span class="domain-dot">.</span>
+            <span class="domain-slice slice-1" id="sliceCom">com</span>
+          </div>
+
+          <div class="anatomy-direction-arrow">
+            <span>⬅️ ათვლის მიმართულება: მარჯვნიდან მარცხნივ!</span>
+          </div>
+
+          <div class="levels-grid">
+            <div class="level-box level-1-box">
+              <div class="level-badge">🥇 1-ლი დონე (მარჯვნივ)</div>
+              <h4>უმაღლესი დონის დომენი (TLD)</h4>
+              <p class="level-example">მაგალითი: <code>.com</code> ან <code>.ge</code></p>
+              <p>მას ასევე უწოდებენ <strong>გაფართოებას</strong> ან <strong>ზონას</strong>. ის განსაზღვრავს საიტის ძირითად კატეგორიას ან ქვეყანას.</p>
+            </div>
+
+            <div class="level-box level-2-box">
+              <div class="level-badge">🥈 მე-2 დონე (შუაში)</div>
+              <h4>ძირითადი დომენური სახელი</h4>
+              <p class="level-example">მაგალითი: <code>avangardhosting</code></p>
+              <p>ეს არის თავად ორგანიზაციის, კომპანიის ან ადამიანის უნიკალური სახელი, რომელსაც ის თვითონ ირჩევს.</p>
+            </div>
+
+            <div class="level-box level-3-box">
+              <div class="level-badge">🥉 მე-3 დონე (მარცხნივ)</div>
+              <h4>ქვედომენი (Subdomain)</h4>
+              <p class="level-example">მაგალითი: <code>order</code></p>
+              <p>მე-3 და უფრო მაღალი დონის დომენებს <strong>ქვედომენს</strong> უწოდებენ. ის გამოიყენება სპეციალური განყოფილებისთვის (მაგ. შეკვეთები, ბლოგი, ბავშვთა კუთხე).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- უმაღლესი დონის დომენების (TLD) სამი კატეგორია -->
+      <div class="card">
+        <h3 class="section-heading">🌐 გაფართოებების (TLD) 3 ძირითადი ოჯახი</h3>
+        <div class="grid-3-col">
+          <div class="tld-category-card">
+            <div class="tld-icon">🌍</div>
+            <h4>1. გლობალური / ზოგადი (gTLD)</h4>
+            <p>ყველაზე გავრცელებული ზონები მსოფლიოში:</p>
+            <ul class="styled-list">
+              <li><strong>.com</strong> — კომერციული / ზოგადი</li>
+              <li><strong>.org</strong> — ორგანიზაციები და ფონდები</li>
+              <li><strong>.net</strong> — ქსელური სერვისები</li>
+              <li><strong>.info</strong> — საინფორმაციო საიტები</li>
+              <li><strong>.biz</strong> — ბიზნესი</li>
+            </ul>
+          </div>
+
+          <div class="tld-category-card">
+            <div class="tld-icon">🎯</div>
+            <h4>2. სპეციალური გაფართოებები</h4>
+            <p>კონკრეტული სფეროებისთვის განკუთვნილი:</p>
+            <ul class="styled-list">
+              <li><strong>.tv</strong> — ტელევიზია / ვიდეო მედია</li>
+              <li><strong>.mobi</strong> — მობილური საიტები</li>
+              <li><strong>.aero</strong> — ავიაცია და აეროპორტები</li>
+              <li><strong>.museum</strong> — მსოფლიოს მუზეუმები</li>
+              <li><strong>.travel</strong> — მოგზაურობა და ტურიზმი</li>
+            </ul>
+          </div>
+
+          <div class="tld-category-card">
+            <div class="tld-icon">🇬🇪</div>
+            <h4>3. ქვეყნის კოდები (ccTLD)</h4>
+            <p>კონკრეტული ქვეყნის ეროვნული ზონები:</p>
+            <ul class="styled-list">
+              <li><strong>.ge</strong> — საქართველო 🇬🇪</li>
+              <li><strong>.uk</strong> — დიდი ბრიტანეთი 🇬🇧</li>
+              <li><strong>.de</strong> — გერმანია 🇩🇪</li>
+              <li><strong>.fr</strong> — საფრანგეთი 🇫🇷</li>
+              <li><strong>.us</strong> — აშშ 🇺🇸</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ტექნიკური წესები და ICANN -->
+      <div class="card rules-highlight-card">
+        <div class="rules-header">
+          <span class="rules-badge">ტექნიკური წესები</span>
+          <h3>📐 რა სიმბოლოებია დაშვებული და ვინ არეგულირებს?</h3>
+        </div>
+
+        <div class="grid-2-col">
+          <div class="rule-sub-box">
+            <h4>✅ რა არის დაშვებული დომენის სახელში?</h4>
+            <ul class="styled-list">
+              <li>მხოლოდ <strong>ლათინური ასოები</strong> (a-z);</li>
+              <li><strong>ციფრები</strong> (0-9);</li>
+              <li><strong>დეფისი</strong> (<code>-</code>).</li>
+              <li>📏 სიგრძე: <strong>არაუმეტეს 63 სიმბოლოსი</strong>!</li>
+            </ul>
+            <div class="warning-callout">
+              ⚠️ <strong>აკრძალულია:</strong> სფეისი (გამოტოვება), წერტილი სახელის შიგნით, სიმბოლოები (<code>!@#$%^&*</code>).
+            </div>
+          </div>
+
+          <div class="rule-sub-box icann-box">
+            <div class="icann-header">
+              <span class="icann-icon">🏛️</span>
+              <h4>ვინ არის ICANN?</h4>
+            </div>
+            <p>
+              <strong>ICANN</strong> (Internet Corporation for Assigned Names and Numbers) — სახელებისა და ნომრების მინიჭების საერთაშორისო კორპორაციაა.
+            </p>
+            <p>
+              ეს არის მსოფლიო ორგანიზაცია, რომელიც არეგულირებს დომენების სისტემას მთელ დედამიწაზე, რათა ინტერნეტში წესრიგი და უნიკალურობა იყოს დაცული!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-footer">
+        <button class="btn btn-prev" data-go="module-house">⬅️ წინა ნაბიჯი</button>
+        <button class="btn btn-next" data-go="module-ethics">შემდეგი: კუთვნილება & ეთიკა ➡️</button>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         მოდული 4: კუთვნილება, წესები და ციფრული ეთიკა
+         =================================================== -->
+    <section id="module-ethics" class="tab-panel" role="tabpanel">
+      <div class="card intro-hero-card">
+        <div class="hero-badge">ნაბიჯი 4 • უფლებები და პასუხისმგებლობა</div>
+        <h2 class="card-title">კუთვნილება, წესები და ციფრული კულტურა</h2>
+        <p class="hero-desc">
+          შეიძლება თუ არა დომენის გაყიდვა? რით განსხვავდება ქართული <strong>.ge</strong> გლობალური <strong>.com</strong>-ისგან და რატომ არის მნიშვნელოვანი პატივისცემა ინტერნეტში?
+        </p>
+      </div>
+
+      <!-- შედარება: .com vs .ge -->
+      <div class="card">
+        <h3 class="section-heading">⚖️ გლობალური (.com) VS ქართული (.ge) დომენი</h3>
+        <p class="section-sub">ნახე, რა მნიშვნელოვანი განსხვავებებია წესებსა და უფლებებში:</p>
+
+        <div class="compare-table-wrapper">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>მახასიათებელი</th>
+                <th>გლობალური (.com, .org, .net...)</th>
+                <th>ქართული ზონა (.ge)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>⏳ რეგისტრაციის ვადა</strong></td>
+                <td>1-დან 10 წლამდე (განახლების უფლებით)</td>
+                <td><strong>1 წელი</strong> (შემდეგ ყოველწლიურად განახლებადი)</td>
+              </tr>
+              <tr>
+                <td><strong>👤 ვინ შეიძლება შეიძინოს?</strong></td>
+                <td>ნებისმიერმა ადამიანმა მსოფლიოში</td>
+                <td>საქართველოს იურიდიულმა ან ფიზიკურმა პირმა</td>
+              </tr>
+              <tr>
+                <td><strong>📜 მინიჭებული უფლებები</strong></td>
+                <td><span class="badge-tag green">ფლობა, სარგებლობა და გასხვისება (გაყიდვა)</span></td>
+                <td><span class="badge-tag orange">მხოლოდ ფლობა და სარგებლობა!</span></td>
+              </tr>
+              <tr>
+                <td><strong>🚫 გაყიდვა / გაჩუქება</strong></td>
+                <td>ნებადართულია (დომენინგის ბიზნესი)</td>
+                <td><strong>აკრძალულია გასხვისება ან გაჩუქება!</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-callout">
+          💡 <strong>რატომ არის .ge-ზე ასეთი წესი?</strong> რათა დაცული იყოს ჩვენი ეროვნული ინტერნეტ-სივრცე სპეკულაციისა და უსამართლო გადაყიდვისგან.
+        </div>
+      </div>
+
+      <!-- ციფრული ეთიკის ბლოკი -->
+      <div class="card ethics-focus-card">
+        <div class="ethics-title-row">
+          <span class="ethics-shield-icon">🛡️</span>
+          <div>
+            <h3>ციფრული ეთიკა და პასუხისმგებლობა V-VI კლასელებისთვის</h3>
+            <p>ინტერნეტში ქცევის ოქროს წესები: როგორ გავხდეთ კეთილსინდისიერი მოქალაქეები ციფრულ სამყაროში?</p>
+          </div>
+        </div>
+
+        <div class="grid-2-col">
+          <div class="ethics-point-box">
+            <h4>🚫 „დომენური მეკობრეობა“ (კიბერსკვოტინგი)</h4>
+            <p>
+              როცა ადამიანი წინასწარ იკავებს სხვისი სკოლის, კლუბის, მეგობრის ან ბრენდის სახელს მხოლოდ იმ მიზნით, რომ მერე მას ძვირად მიჰყიდოს, ეს <strong>არაეთიკური და უსამართლოა</strong>!
+            </p>
+            <p>ეს არღვევს მეგობრულ ურთიერთობებს და აფერხებს სხვების კეთილსინდისიერ საქმიანობას.</p>
+          </div>
+
+          <div class="ethics-point-box">
+            <h4>🔒 პირადი უსაფრთხოება და მონაცემები</h4>
+            <p>
+              დომენური სახელის შერჩევისას <strong>არასდროს გამოიყენო პირადი საიდუმლოებები</strong>: პირადი ნომერი, პაროლები, ტელეფონის ნომერი ან საცხოვრებელი ბინის მისამართი!
+            </p>
+            <p>შეარჩიე შემოქმედებითი, მარტივი და შინაარსიანი სახელი შენი პროექტისთვის.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ინტერაქტიული ეთიკური დეტექტივი (3 ქეისი) -->
+      <div class="card interactive-box">
+        <div class="box-header">
+          <span class="box-tag">ინტერაქტიული ქეისები</span>
+          <h3>🕵️‍♂️ ეთიკური დეტექტივი: როგორ მოიქცეოდი შენ?</h3>
+          <p>წაიკითხე სასკოლო სიტუაციები და აირჩიე ყველაზე სწორი და პასუხისმგებლიანი გადაწყვეტილება:</p>
+        </div>
+
+        <div class="ethics-cases-container" id="ethicsCasesContainer">
+          <!-- ქეისები შეივსება JS-ით -->
+        </div>
+      </div>
+
+      <div class="step-footer">
+        <button class="btn btn-prev" data-go="module-levels">⬅️ წინა ნაბიჯი</button>
+        <button class="btn btn-next" data-go="module-lab">შემდეგი: დომენ-ლაბორატორია ➡️</button>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         მოდული 5: დომენ-ლაბორატორია (ინტერაქტიული სიმულატორი)
+         =================================================== -->
+    <section id="module-lab" class="tab-panel" role="tabpanel">
+      <div class="card intro-hero-card">
+        <div class="hero-badge">ნაბიჯი 5 • პრაქტიკული ლაბორატორია</div>
+        <h2 class="card-title">დომენ-ლაბორატორია: შეამოწმე და დაშალე დომენი!</h2>
+        <p class="hero-desc">
+          აქ შეგიძლია საკუთარი ხელით დაშალო ნებისმიერი დომენი მარჯვნიდან მარცხნივ და შეამოწმო, აკმაყოფილებს თუ არა შენი მოფიქრებული სახელი ICANN-ის წესებს!
+        </p>
+      </div>
+
+      <!-- აქტივობა A: დომენის დეკონსტრუქტორი -->
+      <div class="card lab-section-card">
+        <div class="lab-card-header">
+          <span class="lab-pill">ინტერაქტივი 1</span>
+          <h3>🧩 დომენის დეკონსტრუქტორი (მარჯვნიდან მარცხნივ)</h3>
+        </div>
+        <p>შეიყვანე ან აირჩიე დომენი და ნახე, როგორ დაიშლება ის სართულებად:</p>
+
+        <div class="preset-domains-row">
+          <span>მაგალითები:</span>
+          <button class="preset-btn" data-domain="kids.astronomy.ge">kids.astronomy.ge</button>
+          <button class="preset-btn" data-domain="order.avangardhosting.com">order.avangardhosting.com</button>
+          <button class="preset-btn" data-domain="tbilisi.museum">tbilisi.museum</button>
+          <button class="preset-btn" data-domain="news.bbc.co.uk">news.bbc.co.uk</button>
+        </div>
+
+        <div class="deconstructor-input-row">
+          <input type="text" id="deconInput" class="form-input" value="kids.astronomy.ge" placeholder="შეიყვანე დომენი (მაგ: club.school.ge)">
+          <button id="btnDeconstruct" class="btn btn-primary">🔍 დაშალე დონეებად!</button>
+        </div>
+
+        <div class="deconstructor-result" id="deconstructorResult">
+          <!-- ივსება დინამიკურად JS-ით -->
+        </div>
+      </div>
+
+      <!-- აქტივობა B: დომენის შემქმნელი და წესების შემმოწმებელი -->
+      <div class="card lab-section-card">
+        <div class="lab-card-header">
+          <span class="lab-pill">ინტერაქტივი 2</span>
+          <h3>✍️ მოიფიქრე შენი დომენი & ცოცხალი ვალიდატორი</h3>
+        </div>
+        <p>
+          ჩაწერე შენი საოცნებო საიტის სახელი. სისტემა ცოცხალ რეჟიმში შეამოწმებს 63-სიმბოლოიან ლიმიტს, სიმბოლოების სისწორესა და გაფართოების ტიპს!
+        </p>
+
+        <div class="creator-box">
+          <div class="creator-input-group">
+            <span class="input-prefix">https://</span>
+            <input type="text" id="creatorDomainName" class="creator-input" placeholder="chemi-magari-proeqti" value="chemi-proeqti">
+            <select id="creatorTldSelect" class="creator-select">
+              <optgroup label="ქვეყნის კოდები">
+                <option value=".ge">.ge (საქართველო)</option>
+                <option value=".uk">.uk (ბრიტანეთი)</option>
+              </optgroup>
+              <optgroup label="გლობალური">
+                <option value=".com">.com (გლობალური)</option>
+                <option value=".org">.org (ორგანიზაცია)</option>
+                <option value=".net">.net (ქსელი)</option>
+              </optgroup>
+              <optgroup label="სპეციალური">
+                <option value=".tv">.tv (ტელე/მედია)</option>
+                <option value=".museum">.museum (მუზეუმი)</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="char-counter-bar">
+            <span>სიმბოლოების რაოდენობა: <strong id="charCountDisplay">13</strong> / 63</span>
+            <div class="char-progress-track">
+              <div class="char-progress-fill" id="charProgressFill" style="width: 20%;"></div>
+            </div>
+          </div>
+
+          <!-- ვალიდაციის ჩეკლისტი -->
+          <div class="validator-checklist" id="validatorChecklist">
+            <div class="val-item" id="valRuleChars">
+              <span class="val-icon">⏳</span>
+              <span class="val-text">მხოლოდ ლათინური ასოები, ციფრები და დეფისი (-)</span>
+            </div>
+            <div class="val-item" id="valRuleLength">
+              <span class="val-icon">⏳</span>
+              <span class="val-text">სიგრძე: მაქსიმუმ 63 სიმბოლო</span>
+            </div>
+            <div class="val-item" id="valRuleHyphen">
+              <span class="val-icon">⏳</span>
+              <span class="val-text">არ იწყება და არ მთავრდება დეფისით (-)</span>
+            </div>
+          </div>
+
+          <div class="creator-verdict-box" id="creatorVerdictBox">
+            <!-- დინამიკური დასკვნა -->
+          </div>
+        </div>
+      </div>
+
+      <div class="step-footer">
+        <button class="btn btn-prev" data-go="module-ethics">⬅️ წინა ნაბიჯი</button>
+        <button class="btn btn-next" data-go="module-quiz">შემდეგი: ქვიზი & სერტიფიკატი ➡️</button>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         მოდული 6: დიდი ქვიზი და სერტიფიკატი
+         =================================================== -->
+    <section id="module-quiz" class="tab-panel" role="tabpanel">
+      <div class="card intro-hero-card">
+        <div class="hero-badge">ნაბიჯი 6 • ცოდნის შემოწმება</div>
+        <h2 class="card-title">დომენების ოსტატის ქვიზი & სერტიფიკატი!</h2>
+        <p class="hero-desc">
+          შეამოწმე, რამდენად კარგად აითვისე მასალა! უპასუხე შეკითხვებს, მიიღე მყისიერი განმარტებები და მოიპოვე შენი პერსონალური სერტიფიკატი!
+        </p>
+      </div>
+
+      <!-- ქვიზის კონტეინერი -->
+      <div class="card quiz-card" id="quizContainer">
+        <div class="quiz-progress-header">
+          <div class="quiz-q-indicator">
+            შეკითხვა <span id="currentQNum">1</span> / <span id="totalQNum">6</span>
+          </div>
+          <div class="quiz-score-indicator">
+            მიმდინარე ქულა: <span id="quizScoreDisplay">0</span>
+          </div>
+        </div>
+
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="quizProgressFill" style="width: 16%;"></div>
+        </div>
+
+        <!-- კითხვის სხეული -->
+        <div class="quiz-question-body">
+          <h3 class="quiz-question-text" id="quizQuestionText">კითხვა იტვირთება...</h3>
+          <div class="quiz-options-list" id="quizOptionsList">
+            <!-- ოფციები JS-ით -->
+          </div>
+        </div>
+
+        <!-- უკუკავშირის ბლოკი (სკაფოლდინგით და რჩევით) -->
+        <div class="quiz-feedback-box hidden" id="quizFeedbackBox">
+          <div class="feedback-icon" id="feedbackIcon">💡</div>
+          <div class="feedback-content">
+            <h4 id="feedbackTitle">კარგი მცდელობაა!</h4>
+            <p id="feedbackText">აქ დაიწერება კონსტრუქციული უკუკავშირი...</p>
+          </div>
+          <button id="btnNextQuestion" class="btn btn-primary">შემდეგი შეკითხვა ➡️</button>
+        </div>
+      </div>
+
+      <!-- დასრულების ეკრანი (ქვიზის შემდეგ) -->
+      <div class="card quiz-finish-card hidden" id="quizFinishCard">
+        <div class="finish-confetti-badge">🎉</div>
+        <h2>ყოჩაღ! შენ წარმატებით გაიარე გაკვეთილი!</h2>
+        <p class="finish-score-lead">შენი საბოლოო შედეგია: <strong id="finalScoreVal">100</strong> / 100 ქულა</p>
+
+        <div class="certificate-entry-box">
+          <label for="studentNameInput"><strong>ჩაწერე შენი სახელი და გვარი სერტიფიკატისთვის:</strong></label>
+          <div class="cert-input-row">
+            <input type="text" id="studentNameInput" class="form-input" placeholder="მაგალითად: ნიკოლოზ ბერიძე" maxlength="40">
+            <button id="btnGenerateCert" class="btn btn-success">🎓 სერტიფიკატის მიღება!</button>
+          </div>
+        </div>
+
+        <div class="finish-actions">
+          <button id="btnRestartQuiz" class="btn btn-secondary">🔄 ქვიზის თავიდან გავლა</button>
+        </div>
+      </div>
+
+      <!-- სერტიფიკატის მოდალი / ბლოკი -->
+      <div class="certificate-modal hidden" id="certificateModal">
+        <div class="certificate-modal-content">
+          <button class="cert-close-btn" id="btnCloseCert" aria-label="დახურვა">✕</button>
+
+          <!-- სერტიფიკატის ოფიციალური დიზაინი -->
+          <div class="certificate-frame" id="printableCertificate">
+            <div class="cert-border-outer">
+              <div class="cert-border-inner">
+                <div class="cert-header">
+                  <div class="cert-emblem">🌐</div>
+                  <div class="cert-super-title">ინტერნეტ-ტექნოლოგიების აკადემია</div>
+                  <h1 class="cert-main-title">ს ე რ ტ ი ფ ი კ ა ტ ი</h1>
+                  <div class="cert-award-text">ეს დოკუმენტი ადასტურებს, რომ</div>
+                </div>
+
+                <div class="cert-recipient-name" id="certRecipientName">
+                  მოსწავლის სახელი და გვარი
+                </div>
+
+                <div class="cert-description">
+                  წარმატებით გაიარა სასწავლო მოდული კომპიუტერულ ტექნოლოგიებში:
+                  <br>
+                  <strong class="cert-topic">„რა არის დომენი? დონეები, წესები და ციფრული ეთიკა“</strong>
+                  <br>
+                  (V–VI კლასის ეროვნული სასწავლო გეგმის სტანდარტი)
+                </div>
+
+                <div class="cert-footer">
+                  <div class="cert-col">
+                    <span class="cert-sign-line"></span>
+                    <span class="cert-sign-label">დოტი (ციფრული ასისტენტი)</span>
+                  </div>
+                  <div class="cert-stamp">
+                    <div class="stamp-circle">
+                      <span>✓ VERIFIED</span>
+                      <span>DOMAINS</span>
+                    </div>
+                  </div>
+                  <div class="cert-col">
+                    <span class="cert-date" id="certDateDisplay">2026 წელი</span>
+                    <span class="cert-sign-label">თარიღი</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cert-modal-actions">
+            <button id="btnPrintCert" class="btn btn-primary">🖨️ სერტიფიკატის ამობეჭდვა / PDF</button>
+            <button id="btnDownloadCertImg" class="btn btn-secondary">დახურვა</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ქვედა კოლონტიტული (Footer) -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>სასწავლო რესურსი შექმნილია V–VI კლასის კომპიუტერული ტექნოლოგიების სტანდარტების შესაბამისად.</p>
+      <p class="footer-sub">თემა: დომენური სახელები, ჰოსტინგი, ვებ-არქიტექტურა, ICANN, .ge რეგულაციები და ციფრული ეთიკა.</p>
+    </div>
+  </footer>
+
+  <!-- ტივტივა კონფეტის ტილო -->
+  <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>
